@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Holid 27 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for product cards -->
+    <style>
+        .product-image {
+            height: 180px;
+            object-fit: cover;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 150px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .categories-table {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">holid <sup>27</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Items -->
+            <li class="nav-item">
+                <a class="nav-link" href="partners.html">
+                    <i class="fas fa-fw fa-handshake"></i>
+                    <span>Partners</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="contacts.html">
+                    <i class="fas fa-fw fa-address-book"></i>
+                    <span>Contacts</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="callme.html">
+                    <i class="fas fa-fw fa-phone"></i>
+                    <span>Call me</span>
+                </a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid mt-4">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Products</h1>
+                        <div>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm mr-2" data-toggle="modal" data-target="#contactModal">
+                                <i class="fas fa-address-book fa-sm text-white-50"></i> Manage Contacts
+                            </a>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm mr-2" data-toggle="modal" data-target="#manageCategoriesModal">
+                                <i class="fas fa-tags fa-sm text-white-50"></i> Manage Categories
+                            </a>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#addProductModal">
+                                <i class="fas fa-plus fa-sm text-white-50"></i> Add New Product
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Content Row - Summary Cards -->
+                    <div class="row">
+                        <!-- Total Products Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Products</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProducts">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-box fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Average Price Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Average Price</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="averagePrice">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Categories Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Categories</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCategories">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-tags fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Highest Price Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Highest Price</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="highestPrice">0</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-arrow-up fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product List -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary mb-2 mb-md-0">Products List</h6>
+                            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
+                                <select id="categoryFilter" class="custom-select custom-select-sm mb-2 mb-md-0 mr-md-2" style="width: auto;">
+                                    <option value="">All Categories</option>
+                                    <!-- Categories will be loaded here -->
+                                </select>
+                                <button id="refreshBtn" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-sync-alt fa-sm"></i> Refresh
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="productsList">
+                                <!-- Products will be loaded here -->
+                                <div class="col-12 text-center py-5">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <p class="mt-2">Loading products...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Holid 27</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Product Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price (UZS)</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="">Select Category</option>
+                                <!-- Categories will be loaded here -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageFile">Product Image</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageFile" name="imageFile" accept="image/*" required>
+                                <label class="custom-file-label" for="imageFile">Choose file</label>
+                            </div>
+                            <div class="mt-2">
+                                <img id="imagePreview" class="image-preview d-none" alt="Image Preview">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" id="saveProductBtn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="deleteProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteProductModalLabel">Confirm Delete</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this product? This action cannot be undone.
+                    <input type="hidden" id="deleteProductId">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Categories Modal -->
+    <div class="modal fade" id="manageCategoriesModal" tabindex="-1" role="dialog" aria-labelledby="manageCategoriesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageCategoriesModalLabel">Manage Categories</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <form id="addCategoryForm" class="form-inline">
+                                <div class="form-group mb-2 mr-2">
+                                    <label for="categoryName" class="sr-only">Category Name</label>
+                                    <input type="text" class="form-control" id="categoryName" placeholder="Category Name" required>
+                                </div>
+                                <div class="form-group mb-2 mr-2">
+                                    <label for="categorySlug" class="sr-only">Category Slug</label>
+                                    <input type="text" class="form-control" id="categorySlug" placeholder="Category Slug" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Add Category</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="categories-table">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriesList">
+                                <!-- Categories will be loaded here -->
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <p class="mt-2">Loading categories...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editCategoryForm">
+                        <input type="hidden" id="editCategoryId">
+                        <div class="form-group">
+                            <label for="editCategoryName">Category Name</label>
+                            <input type="text" class="form-control" id="editCategoryName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategorySlug">Category Slug</label>
+                            <input type="text" class="form-control" id="editCategorySlug" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" id="updateCategoryBtn">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Category Confirmation Modal -->
+    <div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCategoryModalLabel">Confirm Delete</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this category? This action cannot be undone.
+                    <input type="hidden" id="deleteCategoryId">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" id="confirmDeleteCategoryBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Manage Contacts</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <form id="contactForm">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="contactPhone">Phone</label>
+                                        <input type="text" class="form-control" id="contactPhone" placeholder="Phone" required>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="contactEmail">Email</label>
+                                        <input type="email" class="form-control" id="contactEmail" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="contactAddress">Address</label>
+                                        <input type="text" class="form-control" id="contactAddress" placeholder="Address" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Contact</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactsList">
+                                <!-- Contacts will be loaded here -->
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <p class="mt-2">Loading contacts...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Contact Modal -->
+    <div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-labelledby="editContactModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editContactModalLabel">Edit Contact</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editContactForm">
+                        <input type="hidden" id="editContactId">
+                        <div class="form-group">
+                            <label for="editContactPhone">Phone</label>
+                            <input type="text" class="form-control" id="editContactPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editContactEmail">Email</label>
+                            <input type="email" class="form-control" id="editContactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editContactAddress">Address</label>
+                            <input type="text" class="form-control" id="editContactAddress" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" id="updateContactBtn">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Contact Confirmation Modal -->
+    <div class="modal fade" id="deleteContactModal" tabindex="-1" role="dialog" aria-labelledby="deleteContactModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteContactModalLabel">Confirm Delete</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this contact? This action cannot be undone.
+                    <input type="hidden" id="deleteContactId">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" id="confirmDeleteContactBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Products Management Script -->
+    <script>
+        // API URLs
+        const API_URL = 'https://food-story.onrender.com/api/products';
+        const CATEGORIES_URL = 'https://food-story.onrender.com/api/categories';
+        const CONTACTS_URL = 'https://food-story.onrender.com/api/contact';
+        
+        // DOM Elements
+        const productsList = document.getElementById('productsList');
+        const totalProductsEl = document.getElementById('totalProducts');
+        const averagePriceEl = document.getElementById('averagePrice');
+        const highestPriceEl = document.getElementById('highestPrice');
+        const totalCategoriesEl = document.getElementById('totalCategories');
+        const categoryFilterEl = document.getElementById('categoryFilter');
+        const refreshBtn = document.getElementById('refreshBtn');
+        
+        // Add Product Form Elements
+        const addProductForm = document.getElementById('addProductForm');
+        const saveProductBtn = document.getElementById('saveProductBtn');
+        const imageFileInput = document.getElementById('imageFile');
+        const imagePreview = document.getElementById('imagePreview');
+        const categorySelect = document.getElementById('category');
+        
+        // Delete Product Elements
+        const deleteProductId = document.getElementById('deleteProductId');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        
+        // Category Form Elements
+        const addCategoryForm = document.getElementById('addCategoryForm');
+        const categoryNameInput = document.getElementById('categoryName');
+        const categorySlugInput = document.getElementById('categorySlug');
+        const categoriesList = document.getElementById('categoriesList');
+        
+        // Edit Category Form Elements
+        const editCategoryForm = document.getElementById('editCategoryForm');
+        const editCategoryId = document.getElementById('editCategoryId');
+        const editCategoryName = document.getElementById('editCategoryName');
+        const editCategorySlug = document.getElementById('editCategorySlug');
+        const updateCategoryBtn = document.getElementById('updateCategoryBtn');
+        
+        // Delete Category Elements
+        const deleteCategoryId = document.getElementById('deleteCategoryId');
+        const confirmDeleteCategoryBtn = document.getElementById('confirmDeleteCategoryBtn');
+        
+        // Contact Form Elements
+        const contactForm = document.getElementById('contactForm');
+        const contactPhoneInput = document.getElementById('contactPhone');
+        const contactEmailInput = document.getElementById('contactEmail');
+        const contactAddressInput = document.getElementById('contactAddress');
+        const contactsList = document.getElementById('contactsList');
+        
+        // Edit Contact Form Elements
+        const editContactForm = document.getElementById('editContactForm');
+        const editContactId = document.getElementById('editContactId');
+        const editContactPhone = document.getElementById('editContactPhone');
+        const editContactEmail = document.getElementById('editContactEmail');
+        const editContactAddress = document.getElementById('editContactAddress');
+        const updateContactBtn = document.getElementById('updateContactBtn');
+        
+        // Delete Contact Elements
+        const deleteContactId = document.getElementById('deleteContactId');
+        const confirmDeleteContactBtn = document.getElementById('confirmDeleteContactBtn');
+        
+        // Global variables
+        let categories = [];
+        let contacts = [];
+        
+        // Fetch all categories
+        async function fetchCategories() {
+            try {
+                const response = await fetch(CATEGORIES_URL);
+                const result = await response.json();
+                
+                if (result.success) {
+                    categories = result.data;
+                    populateCategoryDropdowns();
+                    updateCategoriesList();
+                    return categories;
+                } else {
+                    showError('Failed to fetch categories');
+                    return [];
+                }
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+                showError('Error connecting to the server');
+                return [];
+            }
+        }
+        
+        // Populate category dropdowns
+        function populateCategoryDropdowns() {
+            // Clear existing options except the first one
+            categorySelect.innerHTML = '<option value="">Select Category</option>';
+            categoryFilterEl.innerHTML = '<option value="">All Categories</option>';
+            
+            // Add categories to dropdowns
+            categories.forEach(category => {
+                // Add to Add Product form
+                const option1 = document.createElement('option');
+                option1.value = category._id;
+                option1.textContent = category.name;
+                categorySelect.appendChild(option1);
+                
+                // Add to filter dropdown
+                const option3 = document.createElement('option');
+                option3.value = category._id;
+                option3.textContent = category.name;
+                categoryFilterEl.appendChild(option3);
+            });
+            
+            // Update total categories count
+            totalCategoriesEl.textContent = categories.length;
+        }
+        
+        // Update categories list in the manage categories modal
+        function updateCategoriesList() {
+            categoriesList.innerHTML = '';
+            
+            if (categories.length === 0) {
+                categoriesList.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            <p>No categories found</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            categories.forEach(category => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${category.name}</td>
+                    <td>${category.slug}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info edit-category" data-id="${category._id}">
+                            <i class="fas fa-edit fa-sm"></i> Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger delete-category" data-id="${category._id}">
+                            <i class="fas fa-trash fa-sm"></i> Delete
+                        </button>
+                    </td>
+                `;
+                
+                categoriesList.appendChild(row);
+            });
+            
+            // Add event listeners to edit and delete buttons
+            document.querySelectorAll('.edit-category').forEach(button => {
+                button.addEventListener('click', () => openEditCategoryModal(button.dataset.id));
+            });
+            
+            document.querySelectorAll('.delete-category').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.getElementById('deleteCategoryId').value = button.dataset.id;
+                    $('#deleteCategoryModal').modal('show');
+                });
+            });
+        }
+        
+        // Create a new category
+        async function createCategory(event) {
+            event.preventDefault();
+            
+            try {
+                const name = categoryNameInput.value.trim();
+                const slug = categorySlugInput.value.trim();
+                
+                if (!name || !slug) {
+                    showError('Please fill all required fields');
+                    return;
+                }
+                
+                const response = await fetch(CATEGORIES_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, slug })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('Category created successfully');
+                    categoryNameInput.value = '';
+                    categorySlugInput.value = '';
+                    fetchCategories();
+                } else {
+                    showError(result.message || 'Failed to create category');
+                }
+            } catch (error) {
+                console.error('Error creating category:', error);
+                showError('Error connecting to the server');
+            }
+        }
+        
+        // Open edit category modal
+        function openEditCategoryModal(id) {
+            const category = categories.find(cat => cat._id === id);
+            
+            if (category) {
+                editCategoryId.value = category._id;
+                editCategoryName.value = category.name;
+                editCategorySlug.value = category.slug;
+                
+                $('#editCategoryModal').modal('show');
+            } else {
+                showError('Category not found');
+            }
+        }
+        
+        // Update a category
+        async function updateCategory() {
+            try {
+                const id = editCategoryId.value;
+                const name = editCategoryName.value.trim();
+                const slug = editCategorySlug.value.trim();
+                
+                if (!name || !slug) {
+                    showError('Please fill all required fields');
+                    return;
+                }
+                
+                const response = await fetch(`${CATEGORIES_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, slug })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('Category updated successfully');
+                    $('#editCategoryModal').modal('hide');
+                    fetchCategories();
+                } else {
+                    showError(result.message || 'Failed to update category');
+                }
+            } catch (error) {
+                console.error('Error updating category:', error);
+                showError('Error connecting to the server');
+            }
+        }
+        
+        // Delete a category
+        async function deleteCategory(id) {
+            try {
+                const response = await fetch(`${CATEGORIES_URL}/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('Category deleted successfully');
+                    $('#deleteCategoryModal').modal('hide');
+                    fetchCategories();
+                } else {
+                    showError(result.message || 'Failed to delete category');
+                }
+            } catch (error) {
+                console.error('Error deleting category:', error);
+                showError('Error connecting to the server');
+            }
+        }
+        
+        // Fetch all products
+        async function fetchProducts(categoryId = '') {
+            try {
+                productsList.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading products...</p>
+                    </div>
+                `;
+                
+                let url = API_URL;
+                if (categoryId) {
+                    url += `?category=${categoryId}`;
+                }
+                
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayProducts(result.data);
+                    updateSummaryCards(result.data);
+                } else {
+                    showError('Failed to fetch products');
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                showError('Error connecting to the server');
+            }
+        }
+        
+        // Get category name by ID
+        function getCategoryName(categoryId) {
+            if (!categoryId) return 'No Category';
+            const category = categories.find(cat => cat._id === categoryId);
+            return category ? category.name : 'Unknown';
+        }
+        
+        // Display products in cards
+        function displayProducts(products) {
+            productsList.innerHTML = '';
+            
+            if (products.length === 0) {
+                productsList.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-box-open fa-3x text-gray-300 mb-3"></i>
+                        <p>No products found</p>
+                        <button class="btn btn-primary btn-sm mt-2" data-toggle="modal" data-target="#addProductModal">
+                            <i class="fas fa-plus fa-sm"></i> Add New Product
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            products.forEach(product => {
+                const col = document.createElement('div');
+                col.className = 'col-xl-3 col-md-6 mb-4';
+                col.innerHTML = `
+                    <div class="card shadow h-100">
+                        <div class="position-relative">
+                            <img src="${product.image}" class="card-img-top product-image" alt="${product.title}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Image'">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">${product.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-primary font-weight-bold">${formatPrice(product.price)} UZS</h6>
+                            <p class="card-text">${product.description}</p>
+                        </div>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                            <button class="btn btn-sm btn-danger delete-product" data-id="${product._id}">
+                                <i class="fas fa-trash fa-sm"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productsList.appendChild(col);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-product').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.getElementById('deleteProductId').value = button.dataset.id;
+                    $('#deleteProductModal').modal('show');
+                });
+            });
+        }
+        
+        // Update summary cards
+        function updateSummaryCards(products) {
+            totalProductsEl.textContent = products.length;
+            
+            if (products.length > 0) {
+                const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
+                const avgPrice = totalPrice / products.length;
+                const maxPrice = Math.max(...products.map(product => product.price));
+                
+                averagePriceEl.textContent = `${formatPrice(avgPrice)} UZS`;
+                highestPriceEl.textContent = `${formatPrice(maxPrice)} UZS`;
+            } else {
+                averagePriceEl.textContent = '0 UZS';
+                highestPriceEl.textContent = '0 UZS';
+            }
+        }
+        
+        // Format price with commas
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        // Function to convert file to Base64
+        function convertToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Create a new product with Base64 image encoding
+      // Add this function if it's missing
+function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => {
+            console.error("Error reading file:", error);
+            reject(error);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+async function createProduct() {
+    try {
+        const title = document.getElementById('title').value;
+        const price = parseInt(document.getElementById('price').value);
+        const category = document.getElementById('category').value || null;
+        const description = document.getElementById('description').value;
+        const imageFile = document.getElementById('imageFile').files[0];
+        
+        if (!title || !price || !description || !imageFile) {
+            console.error('Please fill all required fields');
+            return;
+        }
+        
+        // Use FormData instead of JSON for file uploads
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('price', price);
+        if (category) formData.append('category', category);
+        formData.append('image', imageFile); // Send the actual file
+        
+        console.log('Sending request to server...');
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            body: formData // No Content-Type header needed, browser sets it automatically
+        });
+        
+        console.log('Server response status:', response.status);
+        const result = await response.json();
+        console.log('Server response data:', result);
+        
+        if (result.success) {
+    console.log('Product created successfully');
+    fetchProducts(categoryFilterEl.value);
+    $('#addProductModal').modal('hide');
+    addProductForm.reset();
+
+    // Properly reset image input visually
+    const oldInput = document.getElementById('imageFile');
+    const newInput = oldInput.cloneNode(true);
+    oldInput.parentNode.replaceChild(newInput, oldInput);
+
+    imagePreview.classList.add('d-none'); // if you have a preview
+
+    // Reload the page
+    location.reload();
+}
+
+
+    } catch (error) {
+        console.error('Error creating product:', error);
+        console.error('Error connecting to the server');
+    }
+}
+        
+        // Delete a product
+        async function deleteProduct(id) {
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('Product deleted successfully');
+                    fetchProducts(categoryFilterEl.value);
+                    $('#deleteProductModal').modal('hide');
+                } else {
+                    showError(result.message || 'Failed to delete product');
+                }
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                showError('Error connecting to the server');
+            }
+        }
+        
+        // Fetch all contacts
+        async function fetchContacts() {
+    try {
+        const res = await fetch(CONTACTS_URL);
+        const data = await res.json();
+        if (data.success) {
+            // Always convert to array, even if single contact
+            contacts = Array.isArray(data.data) ? data.data : [data.data];
+            renderContacts();
+        } else {
+            console.error(data.message || 'Failed to load contacts');
+        }
+    } catch (err) {
+        console.error(err);
+        console.error('Failed to connect to server');
+    }
+}
+
+// Render contacts
+function renderContacts() {
+    contactsList.innerHTML = '';
+
+    if (!Array.isArray(contacts)) return;
+
+    contacts.forEach(contact => {
+        if (!contact || !contact.phone) return; // Skip bad entries
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+    <td>${contact.phone}</td>
+    <td>${contact.email}</td>
+    <td>${contact.address}</td>
+    <td>
+        <div class="d-flex flex-wrap justify-content-start align-items-center gap-2">
+            <button class="btn btn-sm btn-outline-primary d-flex align-items-center gap-2 px-2 mb-2" onclick="editContact('${contact._id}')">
+                <i class="fas fa-edit"></i> <span>Edit</span>
+            </button>
+            <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-2 px-2 onclick="removeContact('${contact._id}')">
+                <i class="fas fa-trash"></i> <span>Delete</span>
+            </button>
+        </div>
+    </td>
+`;
+        contactsList.appendChild(row);
+    });
+}
+
+// Add contact
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const phone = contactPhoneInput.value.trim();
+    const email = contactEmailInput.value.trim();
+    const address = contactAddressInput.value.trim();
+
+    if (!phone || !email || !address) return console.error('All fields are required.');
+
+    try {
+        const res = await fetch(CONTACTS_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone, email, address }),
+        });
+        const data = await res.json();
+        if (data.success) {
+            console.log('Contact added!');
+            contactForm.reset();
+            fetchContacts();
+        } else {
+            console.error(data.message || 'Failed to add contact.');
+        }
+    } catch (err) {
+        console.error('Server error');
+    }
+});
+
+// Open edit modal
+window.editContact = (id) => {
+    const contact = contacts.find(c => c._id === id);
+    if (!contact) return console.error('Contact not found');
+    editContactId.value = contact._id;
+    editContactPhone.value = contact.phone;
+    editContactEmail.value = contact.email;
+    editContactAddress.value = contact.address;
+    $('#editContactModal').modal('show');
+};
+
+// Save edited contact
+editContactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = editContactId.value;
+    const phone = editContactPhone.value.trim();
+    const email = editContactEmail.value.trim();
+    const address = editContactAddress.value.trim();
+
+    if (!phone || !email || !address) return console.error('All fields are required.');
+
+    try {
+        const res = await fetch(`${CONTACTS_URL}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone, email, address }),
+        });
+        const data = await res.json();
+        if (data.success) {
+            console.log('Contact updated!');
+            $('#editContactModal').modal('hide');
+            fetchContacts();
+        } else {
+            console.error(data.message || 'Update failed.');
+        }
+    } catch (err) {
+        console.error('Server error');
+    }
+});
+
+// Update contact button click
+updateContactBtn.addEventListener('click', () => {
+    editContactForm.dispatchEvent(new Event('submit'));
+});
+
+// Delete contact
+window.removeContact = async (id) => {
+    try {
+        const res = await fetch(`${CONTACTS_URL}/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+            console.log('Contact deleted');
+            fetchContacts();
+        } else {
+            console.error(data.message || 'Delete failed');
+        }
+    } catch (err) {
+        console.error('Server error');
+    }
+};
+
+// Show success message
+function showSuccess(message) {
+    console.log(message); // Replaced alert with console.log
+}
+
+// Show error message
+function showError(message) {
+    console.error(message); // Replaced alert with console.error
+}
+
+// Preview image before upload
+function previewImage(input, previewElement) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewElement.src = e.target.result;
+            previewElement.classList.remove('d-none');
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+        
+        // Update custom file input label with selected filename
+        function updateFileInputLabel(input, label) {
+            if (input.files && input.files[0]) {
+                label.textContent = input.files[0].name;
+            } else {
+                label.textContent = 'Choose file';
+            }
+        }
+        
+        // Generate slug from name
+        function generateSlug(name) {
+            return name.toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters
+                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                .replace(/-+/g, '-') // Replace multiple hyphens with a single one
+                .trim();
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch categories and products on page load
+            fetchCategories().then(() => {
+                fetchProducts();
+            });
+            
+            // Image preview for add product form
+            imageFileInput.addEventListener('change', function() {
+                previewImage(this, imagePreview);
+                updateFileInputLabel(this, this.nextElementSibling);
+            });
+            
+            // Auto-generate slug from category name
+            categoryNameInput.addEventListener('input', function() {
+                categorySlugInput.value = generateSlug(this.value);
+            });
+            
+            // Save product button click
+            saveProductBtn.addEventListener('click', createProduct);
+            
+            // Confirm delete product button click
+            confirmDeleteBtn.addEventListener('click', () => {
+                const id = deleteProductId.value;
+                deleteProduct(id);
+            });
+            
+            // Add category form submit
+            addCategoryForm.addEventListener('submit', createCategory);
+            
+            // Update category button click
+            updateCategoryBtn.addEventListener('click', updateCategory);
+            
+            // Confirm delete category button click
+            confirmDeleteCategoryBtn.addEventListener('click', () => {
+                const id = deleteCategoryId.value;
+                deleteCategory(id);
+            });
+            
+            // Category filter change
+            categoryFilterEl.addEventListener('change', () => {
+                fetchProducts(categoryFilterEl.value);
+            });
+            
+            // Refresh button click
+            refreshBtn.addEventListener('click', () => {
+                categoryFilterEl.value = '';
+                fetchProducts();
+            });
+            
+            // Manage Categories modal shown event
+            $('#manageCategoriesModal').on('shown.bs.modal', function () {
+                fetchCategories();
+            });
+            
+            // Contact modal shown event
+            $('#contactModal').on('shown.bs.modal', function () {
+                fetchContacts();
+            });
+            
+            // Delete contact confirmation
+            confirmDeleteContactBtn.addEventListener('click', () => {
+                const id = deleteContactId.value;
+                if (id) {
+                    removeContact(id);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

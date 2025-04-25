@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Holid 27 - Cards</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">holid <sup>27</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+          
+            <!-- Divider -->
+            
+
+            <!-- Heading -->
+            <li class="nav-item active">
+                <a class="nav-link" href="partners.html">
+                    <i class="fas fa-fw fa-handshake"></i> <!-- Partners uchun handshake ikonkasi -->
+                    <span>Partners</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-box"></i> <!-- Products uchun box ikonkasi -->
+                    <span>Products</span>
+                </a>
+            </li>
+            
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i> <!-- Tables uchun table ikonkasi -->
+                    <span>Tables</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="contacts.html">
+                    <i class="fas fa-fw fa-address-book"></i> <!-- Contacts uchun address-book ikonkasi -->
+                    <span>Contacts</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="callme.html">
+                    <i class="fas fa-fw fa-phone"></i> <!-- Call me uchun phone ikonkasi -->
+                    <span>Call me</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column ">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid mt-4">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Partners</h1>
+                    </div>
+                    <div>
+                        <div>
+                            <h1>Add Bussiness partnership</h1>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fileInput" class="form-label">Upload Partner Image</label>
+                            <div class="d-block d-sm-flex align-items-center gap-2">
+                              <input type="file" class="d-block w-sm-25 mb-2 mb-sm-0" id="fileInput" aria-describedby="uploadBtn" aria-label="Upload">
+                              <button onclick="uploadPartner()" class="btn btn-primary" type="button" id="uploadBtn">Upload</button>
+                            </div>
+                          </div>                          
+
+                    </div>
+                    <div id="partnersContainer" class="row g-4 mt-5">
+                        <!-- Partners will be dynamically added here -->
+                    </div>
+                    <!-- Upload Image-->
+                <div id="alertContainer" class="mt-3"></div>
+
+                <script>
+                    const API_URL = "https://food-story.onrender.com/api/partners"; // API URL
+
+                    // Alertni ko'rsatish funksiyasi
+                    function showAlert(message, type = "success") {
+                        const alertContainer = document.getElementById("alertContainer");
+                        const alert = document.createElement("div");
+                        alert.className = `alert alert-${type} alert-dismissible fade show`;
+                        alert.role = "alert";
+                        alert.innerHTML = `
+                            ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        `;
+                        alertContainer.appendChild(alert);
+
+                        // Alertni avtomatik ravishda 5 soniyadan keyin o'chirish
+                        setTimeout(() => {
+                            alert.classList.remove("show");
+                            alert.classList.add("hide");
+                            setTimeout(() => alert.remove(), 500);
+                        }, 5000);
+                    }
+
+                    async function uploadPartner() {
+                        const fileInput = document.getElementById("fileInput");
+                        const file = fileInput.files[0];
+
+                        if (!file) {
+                            showAlert("Please select a file first!", "warning");
+                            return;
+                        }
+
+                        const formData = new FormData();
+                        formData.append("image", file);
+
+                        try {
+                            const res = await fetch(API_URL, {
+                                method: "POST",
+                                body: formData,
+                            });
+
+                            const result = await res.json();
+                            console.log("Upload response:", result);
+
+                            if (res.ok && result.success) {
+                                showAlert("Partner image uploaded successfully!", "success");
+                                fileInput.value = ""; // Clear the input
+                                fetchPartners(); // Refresh partners
+                                setTimeout(() => window.location.reload(), 1000); // Auto-refresh
+                            } else {
+                                showAlert("Failed to upload partner image.", "danger");
+                            }
+                        } catch (error) {
+                            console.error("Upload error:", error);
+                            showAlert("An error occurred during upload.", "danger");
+                        }
+                    }
+
+                    async function deletePartner(id) {
+                        try {
+                            const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+
+                            if (res.ok) {
+                                showAlert("Partner deleted successfully!", "success");
+                                fetchPartners();
+                                setTimeout(() => window.location.reload(), 1000); // Auto-refresh
+                            } else {
+                                showAlert("Failed to delete the partner.", "danger");
+                            }
+                        } catch (err) {
+                            console.error("Error deleting partner:", err);
+                            showAlert("An error occurred while deleting the partner.", "danger");
+                        }
+                    }
+
+                    async function fetchPartners() {
+                        try {
+                            const res = await fetch(API_URL);
+                            const data = await res.json();
+                            console.log("API response:", data);
+
+                            const partners = data.data || [];
+
+                            const container = document.getElementById("partnersContainer");
+                            container.innerHTML = "";
+
+                            partners.forEach(partner => {
+                                const card = document.createElement("div");
+                                card.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+                                card.id = `partner-card-${partner._id}`;
+                                card.innerHTML = `
+                                    <div class="card shadow-sm h-100 border-0">
+                                        <img src="${partner.image}" class="card-img-top" alt="Partner Logo" style="height: 200px; object-fit: contain; background: #f8f9fa;">
+                                        <div class="card-body text-center" id="card-body-${partner._id}">
+                                            <button onclick="deletePartner('${partner._id}')" class="btn btn-sm btn-outline-danger mb-2 w-100">Delete</button>
+                                            <button onclick="editPartner('${partner._id}')" class="btn btn-sm btn-outline-warning w-100">Edit</button>
+                                        </div>
+                                    </div>
+                                `;
+                                container.appendChild(card);
+                            });
+                        } catch (error) {
+                            console.error("Error fetching partners:", error);
+                            showAlert("Failed to fetch partners.", "danger");
+                        }
+                    }
+
+                    function editPartner(id) {
+                        const cardBody = document.getElementById(`card-body-${id}`);
+
+                        // Prevent multiple inputs
+                        if (document.getElementById(`edit-input-${id}`)) return;
+
+                        // Create file input
+                        const fileInput = document.createElement("input");
+                        fileInput.type = "file";
+                        fileInput.className = "form-control mt-2";
+                        fileInput.id = `edit-input-${id}`;
+
+                        // Create save button
+                        const saveBtn = document.createElement("button");
+                        saveBtn.textContent = "Save";
+                        saveBtn.className = "btn btn-success btn-sm mt-2 w-100";
+                        saveBtn.onclick = async () => {
+                            const file = fileInput.files[0];
+                            if (!file) {
+                                showAlert("Please select an image to update!", "warning");
+                                return;
+                            }
+
+                            const formData = new FormData();
+                            formData.append("image", file);
+
+                            try {
+                                await fetch(`${API_URL}/${id}`, {
+                                    method: "PUT",
+                                    body: formData,
+                                });
+                                showAlert("Partner updated successfully!", "success");
+                                fetchPartners();
+                                setTimeout(() => window.location.reload(), 1000); // Auto-refresh
+                            } catch (err) {
+                                console.error("Failed to update:", err);
+                                showAlert("An error occurred while updating the partner.", "danger");
+                            }
+                        };
+
+                        // Append to card body
+                        cardBody.appendChild(fileInput);
+                        cardBody.appendChild(saveBtn);
+                    }
+
+                    fetchPartners();
+                </script>
+
+                <!--Edit Image-->
+                <script>
+                    function editPartner(id) {
+                        const cardBody = document.getElementById(`card-body-${id}`);
+                
+                        // Prevent multiple inputs
+                        if (document.getElementById(`edit-input-${id}`)) return;
+                
+                        // Create file input
+                        const fileInput = document.createElement("input");
+                        fileInput.type = "file";
+                        fileInput.className = "form-control mt-2";
+                        fileInput.id = `edit-input-${id}`;
+                
+                        // Create save button
+                        const saveBtn = document.createElement("button");
+                        saveBtn.textContent = "Save";
+                        saveBtn.className = "btn btn-success btn-sm mt-2 w-100";
+                
+                        saveBtn.onclick = async () => {
+                            const file = fileInput.files[0];
+                            if (!file) {
+                                showAlert("Please select an image to update!", "warning");
+                                return;
+                            }
+                
+                            const formData = new FormData();
+                            formData.append("image", file);
+                
+                            try {
+                                await fetch(`${API_URL}/${id}`, {
+                                    method: "PUT",
+                                    body: formData,
+                                });
+                                showAlert("Partner updated successfully!", "success");
+                                fetchPartners();
+                            } catch (err) {
+                                console.error("Failed to update:", err);
+                                showAlert("An error occurred while updating the partner.", "danger");
+                            }
+                        };
+                
+                        // Create cancel button
+                        const cancelBtn = document.createElement("button");
+                        cancelBtn.textContent = "Cancel";
+                        cancelBtn.className = "btn btn-danger btn-sm mt-2 w-100";
+                
+                        cancelBtn.onclick = () => {
+                            // Remove the input and buttons
+                            fileInput.remove();
+                            saveBtn.remove();
+                            cancelBtn.remove();
+                        };
+                
+                        // Append to card body
+                        cardBody.appendChild(fileInput);
+                        cardBody.appendChild(saveBtn);
+                        cardBody.appendChild(cancelBtn);
+                    }
+                </script>
+                  
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Holid 27</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
