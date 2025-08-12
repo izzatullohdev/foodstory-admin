@@ -43,9 +43,9 @@
     "type": "git",
     "url": "https://github.com/FortAwesome/Font-Awesome"
   },
-  "engines": {
-    "node": ">=6"
-  },
+"engines": {
+  "node": "18.x"
+}
   "dependencies": {},
   "version": "5.15.3",
   "name": "@fortawesome/fontawesome-free",
